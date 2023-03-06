@@ -3,7 +3,6 @@ package HotelJdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.Scanner;
 
 public class HotelDBMS {
 
@@ -15,10 +14,7 @@ public class HotelDBMS {
 	                  "trustServerCertificate=true";
 	        String user = "sa";
 	        String pass = "root";
-		 
-	        Scanner scanner = new Scanner(System.in);
-	       
-		 
+
 	        try (Connection connection = DriverManager.getConnection(url, user, pass);
 	                Statement statement = connection.createStatement()) {
 
@@ -97,7 +93,50 @@ public class HotelDBMS {
 	            statement.executeUpdate(employeesTable);
 
 	            System.out.println("Tables created successfully.");
-            
+	            
+	            
+	            
+	            String sqlHotel = "INSERT INTO Hotels (id, hotel_name, hotel_location, created_date, updated_date, is_Active) "
+                        		+ "VALUES (1, 'Hilton', 'Muscat', '2022-01-01', null, 1)";
+	            		
+	            statement.executeUpdate(sqlHotel);
+
+	            
+	            
+	            String sqlRoomType = "INSERT INTO Room_Type (id, room_type_name, created_date, updated_date, is_Active) "
+                        		   + "VALUES (1, 'Standard', '2022-01-01', null, 1)";
+	            
+	            statement.executeUpdate(sqlRoomType);
+
+	            
+	            
+	            String sqlRoom = "INSERT INTO Rooms (id, room_type_id, hotel_id, created_date, updated_date, is_Active) "
+                        	   + "VALUES (1, 1, 1, '2022-01-01', null, 1)";
+	            
+	            statement.executeUpdate(sqlRoom);
+	            
+	            
+	            
+	            String sqlGuest = "INSERT INTO Guests (id, guest_name, guest_phone, guest_accompanying_members, guest_payment_amount, room_id, hotel_id, created_date, updated_date, is_Active) "
+                                + "VALUES (1, 'Ahmed AL Abri', '555-1234', 2, 200, 1, 1, '2022-01-01', null, 1)";
+	            
+	            statement.executeUpdate(sqlGuest);
+
+	            
+	            
+	            String sqlEmployeeType = "INSERT INTO Employee_Type (id, employee_type_name, created_date, updated_date, is_Active) "
+                        			   + "VALUES (1, 'Manager', '2022-01-01', null, 1)";
+	            
+	            statement.executeUpdate(sqlEmployeeType);
+
+	            
+	            
+	            String sqlEmployee = "INSERT INTO Employees (id, employee_type_id, room_id, created_date, updated_date, is_Active) "
+                        		   + "VALUES (1, 1, 1, '2022-01-01', null, 1)";
+	            
+	            statement.executeUpdate(sqlEmployee);
+
+	            
 	        } catch (Exception ex) {
 	        	System.out.println("Error creating tables: " + ex.getMessage());
 	        }
